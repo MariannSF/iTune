@@ -69,5 +69,7 @@ public class AppDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("App Details");
 
+
+
     }
 }

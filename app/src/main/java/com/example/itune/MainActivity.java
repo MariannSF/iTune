@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements AppCategoriesFrag
         c=category;
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.containerView, TopPaidAppsFragment.newInstance(c))
+                .addToBackStack(null)
                 .commit();
 
     }
