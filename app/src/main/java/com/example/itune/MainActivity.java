@@ -33,4 +33,11 @@ public class MainActivity extends AppCompatActivity implements AppCategoriesFrag
                 .commit();
 
     }
+ /*   public void goToTopPaidApps(String category ) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerView, TopPaidAppsFragment.newInstance(category))
+                .addToBackStack(null)
+                .commit();
+    }*/
+
 }

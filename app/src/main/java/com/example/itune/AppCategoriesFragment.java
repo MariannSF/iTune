@@ -27,7 +27,8 @@ public class AppCategoriesFragment extends Fragment {
     LinearLayoutManager layoutManager;
     ArrayAdapter<String> adapter;
     ListView listView;
-String c;
+    String c;
+
 
     public AppCategoriesFragment() {
         // Required empty public constructor
@@ -53,17 +54,20 @@ String c;
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("App Categories");
-        data = DataServices.getAppCategories();
 
+        //data = DataServices.getAppCategories();
+        ArrayList<String> category = DataServices.getAppCategories();
         listView = binding.listViewAppCategories;
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, data );
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, category );
         listView.setAdapter(adapter);
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                c=data.get(i);
-                mListener.goToTop(c);
-                Toast.makeText(getActivity(), data.get(i)+"", Toast.LENGTH_SHORT).show();
+                mListener.goToTop(category.get(i));
+
+
             }
         });
 
@@ -76,9 +80,9 @@ String c;
         super.onAttach(context);
         if(context instanceof AppCategoriesFragment.AppCategoryListener) {
             mListener = (AppCategoryListener) context;
-        } else{
-            throw new RuntimeException(context.toString() +"");
         }
+
+
     }
 
     AppCategoryListener mListener;
