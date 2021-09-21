@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements AppCategoriesFrag
     public void goToTop(String category) {
         c=category;
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.containerView, new TopPaidAppsFragment(c))
+                .replace(R.id.containerView, TopPaidAppsFragment.newInstance(c))
                 .commit();
 
     }

@@ -30,10 +30,6 @@ public class TopPaidAppsFragment extends Fragment {
     public TopPaidAppsFragment() {
         // Required empty public constructor
     }
-
-    public TopPaidAppsFragment(String c) {
-    }
-
     public static TopPaidAppsFragment newInstance(String category) {
         TopPaidAppsFragment fragment = new TopPaidAppsFragment();
         Bundle args = new Bundle();
@@ -64,14 +60,19 @@ public class TopPaidAppsFragment extends Fragment {
         getActivity().setTitle("Top Paid Apps");
 
     }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof TopPaidAppsFragment.TopApps) {
-            mListener = (TopApps) context;
-        } else{
-            throw new RuntimeException(context.toString() + "");
-        }
+
+        /*    if(context instanceof TopPaidAppsFragment.TopApps) {
+                mListener = (TopApps) context;
+            } else{
+                throw new RuntimeException(context.toString() + "");
+            }*/
+
+
+
     }
 
     TopApps  mListener;
