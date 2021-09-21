@@ -1,5 +1,6 @@
 package com.example.itune;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.itune.databinding.FragmentAppCategoriesBinding;
 
@@ -25,7 +27,7 @@ public class AppCategoriesFragment extends Fragment {
     LinearLayoutManager layoutManager;
     ArrayAdapter<String> adapter;
     ListView listView;
-
+String c;
 
     public AppCategoriesFragment() {
         // Required empty public constructor
@@ -45,7 +47,7 @@ public class AppCategoriesFragment extends Fragment {
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
-FragmentAppCategoriesBinding binding;
+    FragmentAppCategoriesBinding binding;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -59,10 +61,30 @@ FragmentAppCategoriesBinding binding;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                c=data.get(i);
+                mListener.goToTop(c);
+                Toast.makeText(getActivity(), data.get(i)+"", Toast.LENGTH_SHORT).show();
             }
         });
 
+
+
+
+    }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof AppCategoriesFragment.AppCategoryListener) {
+            mListener = (AppCategoryListener) context;
+        } else{
+            throw new RuntimeException(context.toString() +"");
+        }
+    }
+
+    AppCategoryListener mListener;
+
+    public interface AppCategoryListener{
+        public void goToTop(String category);
 
 
 

@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements AppCategoriesFragment.AppCategoryListener {
+    String c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,5 +22,15 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.containerView, new AppCategoriesFragment())
                 .commit();
+    }
+
+
+    @Override
+    public void goToTop(String category) {
+        c=category;
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerView, new TopPaidAppsFragment(c))
+                .commit();
+
     }
 }
