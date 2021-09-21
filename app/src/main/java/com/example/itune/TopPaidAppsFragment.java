@@ -70,7 +70,7 @@ public class TopPaidAppsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Top Paid Apps");
+        getActivity().setTitle(category);
 
         listView= binding.listViewTopPaidApps;
         display =DataServices.getAppsByCategory(category);
@@ -95,9 +95,9 @@ public class TopPaidAppsFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-            if(context instanceof TopPaidAppsFragment.TopAppL) {
-                mListener = (TopAppL) context;
-            }
+        if(context instanceof TopPaidAppsFragment.TopAppL) {
+            mListener = (TopAppL) context;
+        }
     }
 
     TopAppL  mListener;
@@ -143,4 +143,3 @@ class DataAdapter extends ArrayAdapter<DataServices.App>{
     }
 
 }
-
