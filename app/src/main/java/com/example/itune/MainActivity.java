@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity implements AppCategoriesFragment.AppCategoryListener {
+public class MainActivity extends AppCompatActivity implements AppCategoriesFragment.AppCategoryListener ,TopPaidAppsFragment.TopAppL{
     String c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements AppCategoriesFrag
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.containerView, new AppCategoriesFragment())
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -34,11 +35,17 @@ public class MainActivity extends AppCompatActivity implements AppCategoriesFrag
                 .commit();
 
     }
- /*   public void goToTopPaidApps(String category ) {
+    @Override
+    public void goToDetails(DataServices.App app) {
+        DataServices.App c = app;
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.containerView, TopPaidAppsFragment.newInstance(category))
+                .replace(R.id.containerView, AppDetailsFragment.newInstance(c))
                 .addToBackStack(null)
                 .commit();
-    }*/
+
+    }
+
+
+
 
 }

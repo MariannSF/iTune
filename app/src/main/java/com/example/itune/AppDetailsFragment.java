@@ -9,6 +9,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.itune.databinding.FragmentAppDetailsBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,55 +25,71 @@ public class AppDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_APP= "app";
+   DataServices.App app;
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private DataServices.App appn;
+
 
     public AppDetailsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AppDetailsFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static AppDetailsFragment newInstance(String param1, String param2) {
+    public static AppDetailsFragment newInstance(DataServices.App app) {
         AppDetailsFragment fragment = new AppDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_APP, app);
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            app = (DataServices.App)getArguments().getSerializable(ARG_APP);
+
         }
     }
+    FragmentAppDetailsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentAppDetailsBinding.inflate(inflater,container,false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_app_details, container, false);
+        return binding.getRoot();
     }
-
+    ListView listView;
+    ArrayAdapter<String> adapter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("App Details");
+        listView = binding.listViewDetails;
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1);
+        listView.setAdapter(adapter);
+        /*TextView name = binding.textViewAppName;
+        TextView artist = binding.textViewArtistName;
+        TextView release = binding.textViewReleaseDate;
+        name.setText(appn.name);
+        artist.setText(appn.artistName);
+        release.setText(appn.releaseDate);*/
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
+
 
 
 

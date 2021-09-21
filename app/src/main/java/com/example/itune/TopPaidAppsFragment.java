@@ -76,9 +76,15 @@ public class TopPaidAppsFragment extends Fragment {
         display =DataServices.getAppsByCategory(category);
         adapter = new DataAdapter(getActivity(), R.layout.data_row_item,display);
         listView.setAdapter(adapter);
+
+
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                mListener.goToDetails(display.get(i));
+                Log.d("demo", "onItemClick: "+ display.get(i));
 
             }
         });
@@ -89,15 +95,15 @@ public class TopPaidAppsFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-            if(context instanceof TopPaidAppsFragment.TopApps) {
-                mListener = (TopApps) context;
+            if(context instanceof TopPaidAppsFragment.TopAppL) {
+                mListener = (TopAppL) context;
             }
     }
 
-    TopApps  mListener;
+    TopAppL  mListener;
 
-    public interface TopApps{
-        public void goToTop(String category);
+    public interface TopAppL{
+        public void goToDetails(DataServices.App app);
 
     }
 }
@@ -119,7 +125,6 @@ class DataAdapter extends ArrayAdapter<DataServices.App>{
 
         }
 
-
         DataServices.App display = getItem(position);
 
         //Toast.makeText(getContext(), "got here", Toast.LENGTH_SHORT).show();
@@ -132,7 +137,6 @@ class DataAdapter extends ArrayAdapter<DataServices.App>{
         textViewAppName.setText(display.name);
         textViewArtistName.setText(display.artistName);
         textViewReleaseDate.setText(display.releaseDate);
-
 
         return convertView;
 

@@ -37,4 +37,14 @@
         app:layout_constraintStart_toStartOf="@+id/textViewArtistName"
         app:layout_constraintTop_toBottomOf="@+id/textViewArtistName" />
 
+    <ListView
+        android:id="@+id/listViewDetails"
+        android:layout_width="409dp"
+        android:layout_height="647dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReleaseDate" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
