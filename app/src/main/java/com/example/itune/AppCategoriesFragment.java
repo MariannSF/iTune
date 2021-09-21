@@ -11,15 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.example.itune.databinding.FragmentAppCategoriesBinding;
 
 import java.util.ArrayList;
 
 
 public class AppCategoriesFragment extends Fragment {
     ArrayList<String > data = new ArrayList<>();
-    RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
-    DataAdapter adapter;
+    ArrayAdapter<String> adapter;
+    ListView listView;
 
 
     public AppCategoriesFragment() {
@@ -27,29 +32,37 @@ public class AppCategoriesFragment extends Fragment {
     }
 
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
 
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentAppCategoriesBinding.inflate(inflater, container,false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_app_categories, container, false);
+        return binding.getRoot();
     }
-
+FragmentAppCategoriesBinding binding;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("App Categories");
-
         data = DataServices.getAppCategories();
+
+        listView = binding.listViewAppCategories;
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, data );
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
+
+
     }
 }
