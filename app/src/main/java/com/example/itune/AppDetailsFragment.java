@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,14 +73,16 @@ public class AppDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("App Details");
         listView = binding.listViewDetails;
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1,app.genres);
         listView.setAdapter(adapter);
-        /*TextView name = binding.textViewAppName;
+        TextView name = binding.textViewAppName;
         TextView artist = binding.textViewArtistName;
         TextView release = binding.textViewReleaseDate;
-        name.setText(appn.name);
-        artist.setText(appn.artistName);
-        release.setText(appn.releaseDate);*/
+        name.setText(app.name);
+        artist.setText(app.artistName);
+        release.setText(app.releaseDate);
+
+        Log.d("demo", "onViewCreated: "+ app.artistName);
 
 
 
